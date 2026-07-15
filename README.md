@@ -1,17 +1,15 @@
 # DashTrack
 
-Real-time **three-sided food delivery marketplace demo** (customer · restaurant · dasher) with live geospatial tracking.
+DashTrack is a real-time food delivery platform that coordinates customers, restaurants, and delivery partners with live geospatial order tracking.
 
-Inspired by food-delivery platforms like DoorDash / the [FoodFlow](https://github.com/Fouzia-Oreen/FoodFlow_AI-Powered-Food-Delivery-Platform) concept — this repo is an **original implementation**, not a fork. The public FoodFlow tree is largely an empty README scaffold; DashTrack is a working MVP you can run locally.
-
-## What it demonstrates
+## Features
 
 - REST APIs for restaurants, menus, and orders (FastAPI)
-- WebSocket live order status + dasher GPS updates
-- In-memory event bus (Kafka-style topic) for async delivery events
-- TTL menu cache with hit/miss stats (Redis-style caching pattern)
-- Geospatial logic: haversine distance, nearby restaurant ranking, ETA, nearest-dasher assignment
-- Simulated kitchen prep + dasher path interpolation on an OpenStreetMap / Leaflet map
+- WebSocket live order status and dasher GPS updates
+- Event bus for asynchronous delivery location fan-out
+- TTL menu cache with hit and miss statistics
+- Geospatial ranking with haversine distance, nearby restaurant search, ETA estimates, and nearest-dasher assignment
+- Live delivery map using OpenStreetMap and Leaflet
 
 ## Quick start
 
@@ -23,37 +21,37 @@ PYTHONPATH=backend python3 -m uvicorn app.main:app --app-dir backend --reload --
 
 Open [http://127.0.0.1:8000](http://127.0.0.1:8000)
 
-1. Pick a restaurant and menu items  
-2. Click **Place order & track live**  
-3. Watch status timeline + dasher marker move restaurant → customer  
+1. Select a restaurant and menu items
+2. Place an order
+3. Track status updates and dasher movement from restaurant to customer on the map
 
-## Key endpoints
+## API
 
-| Method | Path | Purpose |
+| Method | Path | Description |
 |--------|------|---------|
-| GET | `/api/restaurants` | List / geo-filter restaurants |
-| GET | `/api/restaurants/{id}/menu` | Menu with TTL cache |
-| POST | `/api/orders` | Place order and start live simulation |
-| GET | `/api/orders/{id}` | Order snapshot |
-| GET | `/api/cache/stats` | Cache hit rate |
-| WS | `/ws/orders/{id}` | Live location + status for one order |
-| WS | `/ws/market` | All marketplace delivery events |
+| GET | `/api/restaurants` | List or geo-filter restaurants |
+| GET | `/api/restaurants/{id}/menu` | Get menu (TTL cached) |
+| POST | `/api/orders` | Place an order and start live tracking |
+| GET | `/api/orders/{id}` | Get order details |
+| GET | `/api/cache/stats` | Menu cache hit rate |
+| WS | `/ws/orders/{id}` | Live location and status for one order |
+| WS | `/ws/market` | Marketplace delivery event stream |
 
-## Project layout
+## Project structure
 
 ```
 DashTrack/
   backend/app/
-    main.py          # FastAPI + WebSockets
-    models.py        # Domain models + seed SJ data
-    geo.py           # Haversine / ETA / nearby
-    events.py        # Event bus + TTL cache
-    store.py         # Marketplace state
-    simulator.py     # Prep + dasher movement
-  frontend/          # Leaflet live map UI
+    main.py          # FastAPI application and WebSockets
+    models.py        # Domain models and seed data
+    geo.py           # Distance, ETA, and nearby search
+    events.py        # Event bus and TTL cache
+    store.py         # Application state
+    simulator.py     # Order prep and dasher movement
+  frontend/          # Live map UI
   requirements.txt
 ```
 
 ## Author
 
-Built by [Gitika Rath](https://github.com/gitika123).
+[Gitika Rath](https://github.com/gitika123)
