@@ -54,13 +54,6 @@ DashTrack/
   requirements.txt
 ```
 
-## Interview talking points
-
-- Why an event bus instead of only request/response for location fan-out  
-- How nearest-dasher assignment uses geospatial ranking  
-- How menu TTL caching cuts repeat read load (observe hit rate after second menu fetch)  
-- Honest demo limits: in-memory store, simulated movement, not production Kafka/Redis clusters  
-
 ## Author
 
-Built by [Gitika Rath](https://github.com/gitika123) for DoorDash-oriented product / backend interview prep.
+Built by [Gitika Rath](https://github.com/gitika123).
