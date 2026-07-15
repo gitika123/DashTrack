@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DashTrack — Live Delivery Tracker</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="/static/styles.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="header">
+      <div>
+        <p class="eyebrow">Three-sided marketplace demo</p>
+        <h1>DashTrack</h1>
+        <p class="sub">Customer · Restaurant · Dasher — live geospatial order tracking</p>
+      </div>
+      <div class="stats" id="cacheStats">Cache: —</div>
+    </header>
+
+    <main class="grid">
+      <section class="panel">
+        <h2>Place an order</h2>
+        <label>Restaurant
+          <select id="restaurantSelect"></select>
+        </label>
+        <div id="menuList" class="menu"></div>
+        <button id="orderBtn" class="primary">Place order & track live</button>
+        <p class="hint">Flow: place → restaurant prep → nearest dasher → live GPS hop to dropoff.</p>
+
+        <h2>Active order</h2>
+        <div id="orderMeta" class="meta">No active order</div>
+        <ol id="timeline" class="timeline"></ol>
+      </section>
+
+      <section class="panel map-panel">
+        <h2>Live map</h2>
+        <div id="map"></div>
+        <div class="legend">
+          <span><i class="dot rest"></i> Restaurant</span>
+          <span><i class="dot cust"></i> Customer</span>
+          <span><i class="dot dash"></i> Dasher</span>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="/static/app.js"></script>
+</body>
+</html>
